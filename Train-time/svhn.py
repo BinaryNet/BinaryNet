@@ -114,17 +114,11 @@ if __name__ == "__main__":
         axes= ['b', 'c', 0, 1])
     
     # bc01 format
-    # print train_set.X.shape
-    # print(np.max(train_set.X))
-    # print(np.min(train_set.X))
-    
-    train_set.X = np.reshape(train_set.X,(-1,3,32,32))
-    valid_set.X = np.reshape(valid_set.X,(-1,3,32,32))
-    test_set.X = np.reshape(test_set.X,(-1,3,32,32))
-    
-    # train_set.X = np.reshape(np.subtract(np.multiply(2./255.,train_set.X),1.),(-1,3,32,32))
-    # valid_set.X = np.reshape(np.subtract(np.multiply(2./255.,valid_set.X),1.),(-1,3,32,32))
-    # test_set.X = np.reshape(np.subtract(np.multiply(2./255.,test_set.X),1.),(-1,3,32,32))
+    # Inputs in the range [-1,+1]
+    # print("Inputs in the range [-1,+1]")
+    train_set.X = np.reshape(np.subtract(np.multiply(2./255.,train_set.X),1.),(-1,3,32,32))
+    valid_set.X = np.reshape(np.subtract(np.multiply(2./255.,valid_set.X),1.),(-1,3,32,32))
+    test_set.X = np.reshape(np.subtract(np.multiply(2./255.,test_set.X),1.),(-1,3,32,32))
     # print(np.max(train_set.X))
     # print(np.min(train_set.X))
     
