@@ -100,17 +100,14 @@ if __name__ == "__main__":
     
     train_set = SVHN(
             which_set= 'splitted_train',
-            # path= local_path,
             axes= ['b', 'c', 0, 1])
      
     valid_set = SVHN(
         which_set= 'valid',
-        # path= local_path,
         axes= ['b', 'c', 0, 1])
     
     test_set = SVHN(
         which_set= 'test',
-        # path= local_path,
         axes= ['b', 'c', 0, 1])
     
     # bc01 format
@@ -364,15 +361,3 @@ if __name__ == "__main__":
             valid_set.X,valid_set.y,
             test_set.X,test_set.y,
             shuffle_parts=shuffle_parts)
-    
-    # print("display histogram")
-    
-    # W = lasagne.layers.get_all_layers(mlp)[2].W.get_value()
-    # print(W.shape)
-    
-    # histogram = np.histogram(W,bins=1000,range=(-1.1,1.1))
-    # np.savetxt(str(dropout_hidden)+str(binary)+str(stochastic)+str(H)+"_hist0.csv", histogram[0], delimiter=",")
-    # np.savetxt(str(dropout_hidden)+str(binary)+str(stochastic)+str(H)+"_hist1.csv", histogram[1], delimiter=",")
-    
-    # Optionally, you could now dump the network weights to a file like this:
-    # np.savez('model.npz', lasagne.layers.get_all_param_values(network))

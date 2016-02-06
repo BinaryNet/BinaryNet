@@ -27,10 +27,10 @@ First, you need to get some trained parameters:
 
     python ../Train-time/mnist.py    
     
-Then, you can run the MNIST MLP using our XNOR GPU kernel:
+Then, you can run the trained MNIST MLP using our XNOR GPU kernel:
 
     python mnist.py
     
-The running time will largely depend on the GPU you use.
+The running time will largely depend on the GPU you use (between 0.5s and 2s).
 The test error rate should be around 0.96%.
-You can compare these results with the baseline kernel by modifying the 61-62th lines of the script (do not worry, it is very straightforward).
+You can compare these results with the baseline kernel by modifying the 61-62th lines of the script (it is very straightforward).
