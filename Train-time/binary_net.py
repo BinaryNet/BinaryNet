@@ -52,7 +52,9 @@ def hard_sigmoid(x):
 
 # The neurons' activations binarization function
 # It behaves like the sign function during fprop
-# And it behaves like hard_tanh (2*hard_sigmoid(x)-1) during backprop
+# And it behaves like:
+#   hard_tanh(x) = 2*hard_sigmoid(x)-1 
+# during backpropagation
 def binary_tanh_unit(x):
     return 2.*round3(hard_sigmoid(x))-1.
     
