@@ -34,7 +34,7 @@ from theano.sandbox.rng_mrg import MRG_RandomStreams as RandomStreams
 from theano.scalar.basic import UnaryScalarOp, same_out_nocomplex
 from theano.tensor.elemwise import Elemwise
 
-# My own round function, that does not set the gradient to 0 like Theano's
+# Our own round function, that does not set the gradient to 0 like Theano's
 class Round3(UnaryScalarOp):
     
     def c_code(self, node, name, (x,), (z,), sub):
@@ -52,14 +52,16 @@ def hard_sigmoid(x):
 
 # The neurons' activations binarization function
 # It behaves like the sign function during fprop
-# And it behaves like hard_tanh (2*hard_tanh(x)-1) during backprop
+# And it behaves like hard_tanh (2*hard_sigmoid(x)-1) during backprop
 def binary_tanh_unit(x):
     return 2.*round3(hard_sigmoid(x))-1.
     
 def binary_sigmoid_unit(x):
     return round3(hard_sigmoid(x))
     
-# The weight binarization function, taken from BinaryConnect
+# The weights' binarization function, 
+# taken directly from the BinaryConnect github repository 
+# (which was made available by his authors)
 def binarization(W,H,binary=True,deterministic=False,stochastic=False,srng=None):
     
     # (deterministic == True) <-> test-time <-> inference-time
@@ -208,7 +210,7 @@ def clipping_scaling(updates,network):
     return updates
         
 # Given a dataset and a model, this function trains the model on the dataset for several epochs
-# (There is no default train function in Lasagne yet)
+# (There is no default trainer function in Lasagne yet)
 def train(train_fn,val_fn,
             model,
             batch_size,
