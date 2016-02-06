@@ -1,4 +1,4 @@
-# Copyright 2015 Anonymous researcher(s)
+# Copyright 2016 Anonymous researcher(s)
 
 # This file is part of BinaryNet.
 
