@@ -2,7 +2,7 @@
 
 ## Motivations
 
-The goal of this subrepository is to enable the reproduction of the benchmark results reported in the article 
+The goal of this subrepository is to enable the reproduction of the benchmark results reported in the article:  
 BinaryNet: Training Deep Neural Networks with Weights and Activations Constrained to +1 or -1.
 
 ## Requirements
@@ -37,11 +37,3 @@ The final test error should be around **11.40%**.
 This python script trains a ConvNet on SVHN with BinaryNet.
 It should run for about 2 days on a Titan Black GPU.
 The final test error should be around **2.80%**.
-
-## How to play with it
-
-The python scripts mnist.py, cifar10.py and svhn.py contain all the relevant hyperparameters.
-It is very straightforward to modify them.
-binary_net.py contains custom Lasagne layers which support BinaryNet.
-
-Have fun!
