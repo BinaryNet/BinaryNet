@@ -21,7 +21,7 @@ This script performs 4096x4096x4096 matrix-matrix multiplications with our XNOR 
 The two kernels return exactly the same output when their inputs are constrained to -1 or +1 (but not otherwise).
 The XNOR kernel is about 15x faster than the baseline kernel on a GTX750 Nvidia GPU.
 
-## MNIST MLP Runtime
+## MNIST MLP
 
 First, you need to get a trained MNIST MLP:
 

@@ -12,7 +12,7 @@ BinaryNet: Training Deep Neural Networks with Weights and Activations Constraine
 * [Pylearn2](http://deeplearning.net/software/pylearn2/)
 * [Lasagne](http://lasagne.readthedocs.org/en/latest/user/installation.html)
 * [PyTables](http://www.pytables.org/usersguide/installation.html) (only for the SVHN dataset)
-* a fast Nvidia GPU (or a large amount of patience)
+* A fast Nvidia GPU (or a large amount of patience)
 
 ## MNIST MLP
 
