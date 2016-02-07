@@ -34,7 +34,7 @@ from theano.sandbox.rng_mrg import MRG_RandomStreams as RandomStreams
 from theano.scalar.basic import UnaryScalarOp, same_out_nocomplex
 from theano.tensor.elemwise import Elemwise
 
-# Our own round function, that does not set the gradient to 0 like Theano's
+# Our own rounding function, that does not set the gradient to 0 like Theano's
 class Round3(UnaryScalarOp):
     
     def c_code(self, node, name, (x,), (z,), sub):
@@ -51,10 +51,10 @@ def hard_sigmoid(x):
     return T.clip((x+1.)/2.,0,1)
 
 # The neurons' activations binarization function
-# It behaves like the sign function during fprop
-# And it behaves like:
+# It behaves like the sign function during forward propagation
+# And like:
 #   hard_tanh(x) = 2*hard_sigmoid(x)-1 
-# during backpropagation
+# during back propagation
 def binary_tanh_unit(x):
     return 2.*round3(hard_sigmoid(x))-1.
     

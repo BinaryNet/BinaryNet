@@ -11,7 +11,7 @@ BinaryNet: Training Deep Neural Networks with Weights and Activations Constraine
 * [Theano](http://deeplearning.net/software/theano/install.html) (Bleeding edge version)
 * [Pylearn2](http://deeplearning.net/software/pylearn2/)
 * [Lasagne](http://lasagne.readthedocs.org/en/latest/user/installation.html)
-* an Nvidia GPU (not optional)
+* Nvidia GPU (not optional)
 
 ##  Matrix multiplication
 
