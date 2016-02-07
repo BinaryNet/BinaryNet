@@ -50,6 +50,7 @@ __device__ unsigned int concatenate(float* array)
 }
 
 // 32 bits unsigned int -> 32 single float array
+// TODO: the array allocation should not be done here
 __device__ float* deconcatenate(unsigned int x)
 {
     float * array = new float[32];
@@ -102,6 +103,7 @@ __global__ void xnor_gemm(unsigned int *a, unsigned int *b, float *c, int m, int
     
     if( col < k && row < m) 
     {   
+        // THIS IS THE MOST INTERESTING PART
         float sum = 0;
         for(int i = 0; i < n; i++) 
         {   

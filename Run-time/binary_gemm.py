@@ -30,6 +30,9 @@ from theano.sandbox.cuda.basic_ops import host_from_gpu
 
 import lasagne
 
+# Homemade (and very unoptimized) 
+# Theano GPU matrix multiplication operation
+# Our 'baseline' kernel
 class Gemm(cuda.GpuOp):
     
     def __eq__(self, other):
@@ -99,6 +102,7 @@ class Gemm(cuda.GpuOp):
         
 gemm = Gemm()
 
+# Our 'XNOR' kernel
 class XnorGemm(cuda.GpuOp):
     
     def __eq__(self, other):
@@ -136,7 +140,8 @@ class XnorGemm(cuda.GpuOp):
     
         inputs = [storage_map[v] for v in node.inputs]
         outputs = [storage_map[v] for v in node.outputs]
-
+        
+        # THIS IS PROBABLY THE PART YOU ARE INTERESTED IN
         def thunk():
             
             # inputs
@@ -147,7 +152,7 @@ class XnorGemm(cuda.GpuOp):
             m = A.shape[0]
             n = A.shape[1]
             assert n == B.shape[0] # Otherwise GEMM is impossible
-            assert n%32 == 0 # Otherwise concatenation is impossible
+            assert n%32 == 0 # Otherwise concatenation is not supported
             k = B.shape[1]
             
             # output
@@ -177,8 +182,6 @@ class XnorGemm(cuda.GpuOp):
             grid = (k / block_size + 1, m / block_size + 1) # better too many threads than too little
             xnor_kernel(Ac,Bc,C[0], np.intc(m), np.intc(n/32.), np.intc(k), block= block, grid=grid)
             
-            
-            
         thunk.inputs = inputs
         thunk.outputs = outputs
         thunk.lazy = False
@@ -193,6 +196,7 @@ def SignNumpy(x):
 def SignTheano(x):
     return T.cast(2.*T.ge(x,0)-1., theano.config.floatX)
 
+# A custom Lasagne dense layer using our GPU kernels.
 class DenseLayer(lasagne.layers.DenseLayer):
 
     def __init__(self, incoming, num_units, kernel="theano", **kwargs):
@@ -216,6 +220,7 @@ class DenseLayer(lasagne.layers.DenseLayer):
             activation = activation + self.b.dimshuffle('x', 0)
         return self.nonlinearity(activation)
     
+# Test suite
 if __name__ == "__main__":   
     N = 4096
     m = N
@@ -231,6 +236,7 @@ if __name__ == "__main__":
     dot2 = theano.function([A,B], host_from_gpu(gemm(A, B)))
     dot3 = theano.function([A,B], host_from_gpu(xnor_gemm(A,B)))
     
+    # Generating random BINARY matrices
     a = SignNumpy(np.random.randn(m, n))
     b = SignNumpy(np.random.randn(n, k))
     # a = np.float32(np.random.randn(m, n))
@@ -254,6 +260,7 @@ if __name__ == "__main__":
     # print c3[0][0]
     print("XNOR kernel time = "+str(dot3_duration)+"s")
     
+    # Asserting the kernels are giving the same output
     print "np.mean(np.absolute(c1-c2)) = " + str(np.mean(np.absolute(c1-c2)))
     print "np.mean(np.absolute(c2-c3)) = " + str(np.mean(np.absolute(c2-c3)))
     print "np.allclose(c1, c2) = " + str(np.allclose(c1, c2))
