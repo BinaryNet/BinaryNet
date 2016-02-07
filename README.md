@@ -5,4 +5,4 @@ BinaryNet: Training Deep Neural Networks with Weights and Activations Constraine
 
 It is divided in two subrepositories:
 * Train-time enables the reproduction of the benchmark results reported in the article
-* Run-time makes available the XNOR (and baseline) GPU kernel(s) described in the article
+* Run-time demonstrates the XNOR and baseline GPU kernels described in the article

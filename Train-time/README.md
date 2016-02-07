@@ -2,13 +2,13 @@
 
 ## Motivations
 
-Train-time enables the reproduction of the benchmark results reported in the article: 
+This subrepository enables the reproduction of the benchmark results reported in the article:  
 BinaryNet: Training Deep Neural Networks with Weights and Activations Constrained to +1 or -1.
 
 ## Requirements
 
 * Python, Numpy, Scipy
-* [Theano](http://deeplearning.net/software/theano/install.html) (Bleeding edge version)
+* [Theano](http://deeplearning.net/software/theano/install.html)
 * [Pylearn2](http://deeplearning.net/software/pylearn2/)
 * [Lasagne](http://lasagne.readthedocs.org/en/latest/user/installation.html)
 * [PyTables](http://www.pytables.org/usersguide/installation.html) (only for the SVHN dataset)
