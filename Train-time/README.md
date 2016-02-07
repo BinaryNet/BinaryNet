@@ -2,7 +2,7 @@
 
 ## Motivations
 
-The goal of this subrepository is to enable the reproduction of the benchmark results reported in the article:  
+Train-time enables the reproduction of the benchmark results reported in the article: 
 BinaryNet: Training Deep Neural Networks with Weights and Activations Constrained to +1 or -1.
 
 ## Requirements
