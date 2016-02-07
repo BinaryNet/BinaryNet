@@ -173,7 +173,7 @@ class XnorGemm(cuda.GpuOp):
             Bc = drv.mem_alloc(n*k*4/32)  
             block_size = 64 
             block = (block_size,1,1)
-            grid = (n/block_size+1,1)
+            grid = (k/block_size+1,1)
             concatenate_cols_kernel(B,Bc, np.intc(n), np.intc(k), block= block, grid=grid)
             
             # Launching XNOR_GEMM GPU kernel
@@ -226,8 +226,8 @@ if __name__ == "__main__":
     m = N
     n = N
     k = N
-    # m = 1024
-    # n = 4096 
+    # m = 4096
+    # n = 1024 
     # k = 2048
     
     A = T.fmatrix()
