@@ -42,7 +42,6 @@ from collections import OrderedDict
 
 if __name__ == "__main__":
     
-    # BN parameters
     batch_size = 10000
     print("batch_size = "+str(batch_size))
     
@@ -79,7 +78,7 @@ if __name__ == "__main__":
     mlp = lasagne.layers.InputLayer(shape=(None, 784),input_var=input)   
     mlp = lasagne.layers.DropoutLayer(mlp, p=dropout_in)
     
-    # Input layer is not binary
+    # Input layer is not binary -> use baseline kernel in first hidden layer
     mlp = binary_gemm.DenseLayer(
             mlp,
             nonlinearity=lasagne.nonlinearities.identity,

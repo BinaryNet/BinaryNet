@@ -33,4 +33,4 @@ Then, you can run the trained MNIST MLP using our XNOR GPU kernel:
     
 The execution time largely depends on your GPU (between 0.5s and 2s).
 The test error rate should be around 0.96%.
-You can compare these results with the baseline kernel by modifying the 61-62th lines of the script.
+You can compare these results with the baseline kernel by modifying the 60-61th lines of the script.

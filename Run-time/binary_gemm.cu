@@ -49,20 +49,6 @@ __device__ unsigned int concatenate(float* array)
     return rvalue;
 }
 
-// 32 bits unsigned int -> 32 single float array
-// TODO: the array allocation should not be done here
-__device__ float* deconcatenate(unsigned int x)
-{
-    float * array = new float[32];
-    
-    for (int i = 0; i < 32; i++)    
-    {   
-        array[i] = (x & ( 1 << i )) >> i;
-    }
-    
-    return array;
-}
-
 __global__ void concatenate_rows_kernel(float *a, unsigned int *b, int size)
 { 
     int i = blockIdx.x * blockDim.x + threadIdx.x;
@@ -82,6 +68,20 @@ __global__ void concatenate_cols_kernel(float *a, unsigned int *b, int m, int n)
         } 
         delete[] array;
     }
+}
+
+// 32 bits unsigned int -> 32 single float array
+// TODO: the array allocation should not be done here
+__device__ float* deconcatenate(unsigned int x)
+{
+    float * array = new float[32];
+    
+    for (int i = 0; i < 32; i++)    
+    {   
+        array[i] = (x & ( 1 << i )) >> i;
+    }
+    
+    return array;
 }
 
 __global__ void deconcatenate_rows_kernel(unsigned int *a, float *b, int size)
